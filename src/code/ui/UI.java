@@ -6,16 +6,17 @@ import javax.swing.*;
 
 import code.model.Model;
 /**
- * Candy Crush
+ * Candy Crush - ui
  * @author Wenqian Zhao
  */
 public class UI implements Runnable {
 
-	private JFrame _frame;
+	private JFrame _frame; 
 	private Model _model;
-	private ArrayList<ArrayList<JButton>> _viewBoard;
-	private ArrayList<JLabel> _scores;
-	private JPanel board;
+	private ArrayList<ArrayList<JButton>> _viewBoard; 	//Buttons of the board
+	private ArrayList<JLabel> _scores;	// Show the Level/ Score / Highest Score
+	private JPanel _board;	// Board for button
+	
 	public UI() {
 		_model = new Model();
 		_viewBoard = new ArrayList<ArrayList<JButton>>();
@@ -24,27 +25,27 @@ public class UI implements Runnable {
 	@Override
 	public void run() {
 		_frame = new JFrame("Wenqian Zhao's Lab 11");
-		board = new JPanel();
-		JPanel scoreBoard = new JPanel();
+		_board = new JPanel();
+		JPanel scoreBoard = new JPanel();	
 		scoreBoard.setLayout(new GridLayout(5,1));
 		_scores = new ArrayList<JLabel>();
-		for(int x = 0; x < 5; x++) {
+		for(int x = 0; x < 5; x++) {	//place _score on scoreBoard
 			JLabel score = new JLabel();
 			score.setBackground(new Color(50,50,50));
 			score.setForeground(Color.WHITE);
 			score.setOpaque(true);
 			score.setFont(new Font("Consolas", Font.PLAIN, 18));
 			score.setHorizontalAlignment(JLabel.CENTER);
-			scoreBoard.add(score);
+			scoreBoard.add(score);	
 			_scores.add(score);
 		}
 		_frame.getContentPane().setLayout(new BoxLayout(_frame.getContentPane(), BoxLayout.Y_AXIS));
 
 		_frame.add(scoreBoard);
-		_frame.add(board);
+		_frame.add(_board);
 		newBoard();
 	
-		_model.addObserver(this);
+		_model.addObserver(this);	
 		update();
 		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_frame.pack();
@@ -52,9 +53,9 @@ public class UI implements Runnable {
 	}
 	
 	public void newBoard() {
-		_frame.remove(board);     //remove the old board(JPanel)
-		board = new JPanel();
-		board.setLayout(new GridLayout(_model.rows(), _model.cols()));
+		_frame.remove(_board);		// Remove the old _board(JPanel)
+		_board = new JPanel();		// Renew the _board
+		_board.setLayout(new GridLayout(_model.rows(), _model.cols()));
 		_viewBoard = new ArrayList<ArrayList<JButton>>();
 		for (int r=0; r<_model.rows(); r++) {
 			_viewBoard.add(new ArrayList<JButton>());
@@ -62,11 +63,11 @@ public class UI implements Runnable {
 				JButton button = new JButton();
 				button.setOpaque(true);
 				_viewBoard.get(r).add(button);
-				board.add(button);
+				_board.add(button);
 				button.addActionListener(new EventHandler(_model, r, c));
 			}
 		}	
-		_frame.add(board);
+		_frame.add(_board);
 	}
 
 	public void update() {
@@ -76,9 +77,9 @@ public class UI implements Runnable {
 			newBoard();
 		}
 		//UPDATE SCORES
-		_scores.get(1).setText("Level: " + _model.level());
-		_scores.get(2).setText("Score: " + _model.score());
-		_scores.get(3).setText("Highest Score: " + _model.highestScore());
+		_scores.get(1).setText("Level: " + _model.level());						// Level
+		_scores.get(2).setText("Score: " + _model.score());						// Score
+		_scores.get(3).setText("Highest Score: " + _model.highestScore());		// Highest Score
 		// UPDATE BOARD - redraw the whole thing
 		for (int r=0; r<_model.rows(); r++) {
 			for (int c=0; c<_model.cols(); c++) {

@@ -1,5 +1,8 @@
 package code.model;
-
+/**
+ * Candy Crush - Score
+ * @author Wenqian Zhao
+ */
 public class Score {
 
 	private int _score;

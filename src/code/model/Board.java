@@ -4,7 +4,10 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
-
+/**
+ * Candy Crush - board
+ * @author Wenqian Zhao
+ */
 public class Board {
 	private ArrayList<ArrayList<String>> _board;
 	private ArrayList<String> _colorFileNames;

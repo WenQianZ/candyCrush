@@ -3,18 +3,22 @@ package code.model;
 import java.awt.Point;
 import java.util.ArrayList;
 import code.ui.UI;
-
+/**
+ * Candy Crush - model
+ * @author Wenqian Zhao
+ */
 public class Model {
 	
-	private UI _observer;	
+	private UI _observer;
 	private Board _board;
 	private Selector _selector;
 	private Filereader _filereader;
 	private Score _score;
-	private int n;
+	private int _level;
+	
 	public Model() {
-		n = 1;  //start with level 1
-		_board = new Board(n+4,n+4);
+		_level = 1;  // Start with level 1
+		_board = new Board(_level + 4, _level + 4);		// Set up the board
 		_score = new Score();
 		_selector = new Selector(_board,_score);
 		_filereader = new Filereader("Score/highScore.txt");
@@ -62,8 +66,8 @@ public class Model {
 		return _score.level();
 	}
 	public Board newBoard() {
-		n = level();
-		_board = new Board(n+4,n+4);              //create a new board 
+		_level = level();
+		_board = new Board(_level + 4, _level + 4);              //create a new board 
 		_selector = new Selector(_board,_score); //create a new selector to the new board 
 		return _board;
 	}

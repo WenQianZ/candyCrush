@@ -9,7 +9,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
-
+/**
+ * Candy Crush - Filereader
+ * @author Wenqian Zhao
+ */
 public class Filereader implements Iterator<String> {
 	private Scanner _scan;
 	private ArrayList<Integer> list;

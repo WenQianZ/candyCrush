@@ -1,7 +1,10 @@
 package code.model;
 
 import java.awt.Point;
-
+/**
+ * Candy Crush - Selector
+ * @author Wenqian Zhao
+ */
 public class Selector {
 
 	private Point _selectedFirst;
