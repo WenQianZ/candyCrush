@@ -1,5 +1,6 @@
 package code.model;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -21,7 +22,15 @@ public class Filereader implements Iterator<String> {
 		try {
 			_scan = new Scanner(new File(filename));
 		} catch (FileNotFoundException e) {
-			System.out.println("There is no file named \""+filename+"\" found.");
+			try {
+	            File file = new File(filename);
+	            BufferedWriter output = new BufferedWriter(new FileWriter(file));
+	            output.close();
+	        } catch ( IOException e1 ) {
+	            e1.printStackTrace();
+	         
+	        }
+//			System.out.println("There is no file named \""+filename+"\" found.");
 		}
 	}
 	
